@@ -12,6 +12,7 @@ from flask_simpleldap import LDAP, LDAPException
 from kombu import Queue
 from celery import Celery
 from elasticsearch import Elasticsearch
+from requests_aws4auth import AWS4Auth
 
 from aleph import default_settings
 from aleph.archive import archive_from_config
@@ -141,7 +142,19 @@ def get_app_secret_key():
 def get_es():
     app = current_app._get_current_object()
     if not hasattr(app, '_es_instance'):
-        app._es_instance = Elasticsearch(app.config.get('ELASTICSEARCH_URL'),
+        if app.config.get('ELASTICSEARCH_AWS_AUTH'):
+            host = app.config.get('ELASTICSEARCH_URL')
+            awsauth = AWS4Auth(app.config.get('ARCHIVE_AWS_KEY_ID'), app.config.get('ARCHIVE_AWS_SECRET'), app.config.get('ALEPH_ARCHIVE_REGION'), 'es')
+            app._es_instance = es = Elasticsearch(
+                hosts=[{'host': host, 'port': 443}],
+                http_auth=awsauth,
+                use_ssl=True,
+                verify_certs=True,
+                connection_class=RequestsHttpConnection,
+                timeout=120
+            )
+        else:
+            app._es_instance = Elasticsearch(app.config.get('ELASTICSEARCH_URL'),
                                          timeout=120)
     return app._es_instance
 

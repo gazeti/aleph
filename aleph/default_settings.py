@@ -196,6 +196,7 @@ ALEMBIC_DIR = path.abspath(ALEMBIC_DIR)
 
 ELASTICSEARCH_URL = env.get('ALEPH_ELASTICSEARCH_URI', 'http://localhost:9200')
 ELASTICSEARCH_INDEX = env.get('ALEPH_ELASTICSEARCH_INDEX', APP_NAME)
+ELASTICSEARCH_AWS_AUTH = env.get('ALEPH_ELASTICSEARCH_AWS_AUTH', False)
 
 # Enable delayed processing via queue
 CELERY_ALWAYS_EAGER = not env_bool('ALEPH_QUEUE', True)

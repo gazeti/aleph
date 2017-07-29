@@ -53,6 +53,7 @@ git+https://github.com/alephdata/ingestors.git#egg=ingestors
 # Workarounds
 pyopenssl>=17.0.0
 cffi>=1.10.0
+requests-aws4auth>=0.9
 
 # Python 3 backports
 functools32>=3.2
