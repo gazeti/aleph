@@ -44,12 +44,12 @@ base:
 	docker push alephdata/base:latest
 
 image-latest:
-	docker build -t alephdata/aleph:latest .
-	docker push alephdata/aleph:latest
+	docker build -t codeforafrica/aleph:latest .
+	docker push codeforafrica/aleph:latest
 
 image-release:
-	docker build -t alephdata/aleph:1.2 .
-	docker push alephdata/aleph:1.2
+	docker build -t codeforafrica/aleph:1.2 .
+	docker push codeforafrica/aleph:1.2
 
 docs:
 	$(DEVDOCKER) sphinx-build -b html -d docs/_build/doctrees ./docs docs/_build/html

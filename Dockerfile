@@ -1,5 +1,5 @@
 FROM alephdata/base:1.2
-MAINTAINER Friedrich Lindenberg <friedrich@pudo.org>
+MAINTAINER Code for Africa <support@codeforafrica.org>
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN pip install -q --upgrade pip && pip install -q --upgrade setuptools
