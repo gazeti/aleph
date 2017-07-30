@@ -11,7 +11,7 @@ from flask_mail import Mail
 from flask_simpleldap import LDAP, LDAPException
 from kombu import Queue
 from celery import Celery
-from elasticsearch import Elasticsearch
+from elasticsearch import Elasticsearch, RequestsHttpConnection
 from requests_aws4auth import AWS4Auth
 
 from aleph import default_settings
@@ -144,8 +144,11 @@ def get_es():
     if not hasattr(app, '_es_instance'):
         if app.config.get('ELASTICSEARCH_AWS_AUTH'):
             host = app.config.get('ELASTICSEARCH_URL')
-            awsauth = AWS4Auth(app.config.get('ARCHIVE_AWS_KEY_ID'), app.config.get('ARCHIVE_AWS_SECRET'), app.config.get('ALEPH_ARCHIVE_REGION'), 'es')
-            app._es_instance = es = Elasticsearch(
+            awsauth = AWS4Auth(app.config.get('ARCHIVE_AWS_KEY_ID'),
+                               app.config.get('ARCHIVE_AWS_SECRET'),
+                               app.config.get('ARCHIVE_AWS_REGION'),
+                               'es')
+            app._es_instance = Elasticsearch(
                 hosts=[{'host': host, 'port': 443}],
                 http_auth=awsauth,
                 use_ssl=True,
