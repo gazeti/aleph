@@ -91,8 +91,15 @@ def create_app(config={}):
         worker_disable_rate_limits=True,
         # worker_hijack_root_logger=False,
         beat_schedule=app.config['CELERYBEAT_SCHEDULE'],
+
     )
     celery.conf.update(app.config.get('CELERY', {}))
+    if 'aws' in app.config['CELERY_BROKER_URL']:
+        celery.conf.update(
+            broker_transport_options={
+                'region': app.config['ARCHIVE_AWS_REGION']
+            },
+        )
 
     migrate.init_app(app, db, directory=app.config.get('ALEMBIC_DIR'))
     configure_oauth(app)
@@ -157,8 +164,10 @@ def get_es():
                 timeout=120
             )
         else:
-            app._es_instance = Elasticsearch(app.config.get('ELASTICSEARCH_URL'),
-                                         timeout=120)
+            app._es_instance = Elasticsearch(
+                app.config.get('ELASTICSEARCH_URL'),
+                timeout=120
+            )
     return app._es_instance
 
 
