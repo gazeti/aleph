@@ -66,4 +66,4 @@ class SourceAfricaCrawler(DocumentCloudCrawler):
     DC_HOST = 'http://dc.sourceafrica.net/'
     DC_INSTANCE = 'sourceafrica'
     COLLECTION_ID = 'sourceafrica'
-    COLLECTION_LABEL = 'SourceAfrica.net'
+    COLLECTION_LABEL = 'sourceAFRICA'
