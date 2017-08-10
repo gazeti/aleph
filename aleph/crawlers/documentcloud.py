@@ -67,3 +67,4 @@ class SourceAfricaCrawler(DocumentCloudCrawler):
     DC_INSTANCE = 'sourceafrica'
     COLLECTION_ID = 'sourceafrica'
     COLLECTION_LABEL = 'sourceAFRICA'
+    CRAWLER_NAME = 'sourceAFRICA'
