@@ -17,31 +17,31 @@ class DocumentCloudCrawler(DocumentCrawler):
     DC_GROUP = None
     DC_QUERY = None
 
-    def crawl_document(self, document):
-        foreign_id = '%s:%s' % (self.DC_INSTANCE, document.get('id'))
+    def crawl_document(self, dc_document):
+        foreign_id = '%s:%s' % (self.DC_INSTANCE, dc_document.get('id'))
 
         if self.skip_incremental(foreign_id):
             return
 
         document = self.create_document(foreign_id=foreign_id)
-        document.source_url = document.get('canonical_url')
-        document.title = document.get('title')
-        document.author = document.get('author')
-        document.file_name = os.path.basename(document.get('pdf_url'))
+        document.source_url = dc_document.get('canonical_url')
+        document.title = dc_document.get('title')
+        document.author = dc_document.get('author')
+        document.file_name = os.path.basename(dc_document.get('pdf_url'))
         document.mime_type = 'application/pdf'
 
         try:
-            created = parse(document.get('created_at'))
+            created = parse(dc_document.get('created_at'))
             document.add_date(created.date().isoformat())
         except:
             pass
         try:
-            lang = languages.get(iso639_3_code=document.get('language'))
+            lang = languages.get(iso639_3_code=dc_document.get('language'))
             document.add_language(lang.iso639_1_code)
         except:
             pass
 
-        self.emit_url(document, document.get('pdf_url'))
+        self.emit_url(document, dc_document.get('pdf_url'))
 
     def crawl(self):
         search_url = urljoin(self.DC_HOST, 'search/documents.json')
