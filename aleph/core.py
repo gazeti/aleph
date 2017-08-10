@@ -151,10 +151,10 @@ def get_es():
     if not hasattr(app, '_es_instance'):
         if app.config.get('ELASTICSEARCH_AWS_AUTH'):
             host = app.config.get('ELASTICSEARCH_URL')
-            awsauth = AWS4Auth(app.config.get('ARCHIVE_AWS_KEY_ID'),
-                               app.config.get('ARCHIVE_AWS_SECRET'),
-                               app.config.get('ARCHIVE_AWS_REGION'),
-                               'es')
+            awsauth = AWS4AuthNotUnicode(app.config.get('ARCHIVE_AWS_KEY_ID'),
+                                         app.config.get('ARCHIVE_AWS_SECRET'),
+                                         app.config.get('ARCHIVE_AWS_REGION'),
+                                         'es')
             app._es_instance = Elasticsearch(
                 hosts=[{'host': host, 'port': 443}],
                 http_auth=awsauth,
@@ -243,3 +243,12 @@ def url_for(*a, **kw):
         return flask_url_for(*a, **kw)
     except RuntimeError:
         return None
+
+
+# Work-around: https://github.com/sam-washington/requests-aws4auth/issues/24
+
+class AWS4AuthNotUnicode(AWS4Auth):
+    def __call__(self, req):
+        req = super(AWS4AuthNotUnicode, self).__call__(req)
+        req.headers = {str(name): value for name, value in req.headers.items()}
+        return req

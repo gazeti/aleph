@@ -48,8 +48,8 @@ image-latest:
 	docker push codeforafrica/aleph:latest
 
 image-release:
-	docker build -t codeforafrica/aleph:1.2.1 .
-	docker push codeforafrica/aleph:1.2.1
+	docker build -t codeforafrica/aleph:1.2.2 .
+	docker push codeforafrica/aleph:1.2.2
 
 docs:
 	$(DEVDOCKER) sphinx-build -b html -d docs/_build/doctrees ./docs docs/_build/html
