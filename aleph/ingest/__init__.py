@@ -51,7 +51,7 @@ def ingest_url(self, document_id, url):
                     fh.write(chunk)
         if not document.has_meta('source_url'):
             document.source_url = res.url
-        if document.foreign_id:
+        if not document.foreign_id:
             document.foreign_id = res.url
         document.headers = res.headers
         document.content_hash = archive.archive_file(tmp_path)
