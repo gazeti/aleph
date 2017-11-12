@@ -12,6 +12,7 @@ aleph/static/style/_custom.scss
 build*
 docs/_build
 site*
+dist
 
 celerybeat-schedule*
 aleph.env
