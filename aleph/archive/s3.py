@@ -31,7 +31,10 @@ class S3Archive(Archive):  # pragma: no cover
         self.bucket = self.s3.Bucket(self.bucket_name)
 
         try:
-            self.bucket.load()
+            self.bucket.put_object(Key='aleph_test.txt')
+            self.bucket.delete_objects(Delete={
+                'Objects': [{'Key': 'aleph_test.txt'}]
+            })
         except ClientError as e:
             error_code = int(e.response['Error']['Code'])
             if error_code == 404:
