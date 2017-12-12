@@ -1,6 +1,6 @@
-<div class="jumbotron">
-  <h1>{{::statistics.documents_count + statistics.entities_count | number}} leads</h1>
-  <p class="teaser">for your investigations</p>
+<div class="jumbotron" style="background-image: url(/static/images/docs.png); text-shadow: 0 0 10px #333;">
+  <h1>{{::statistics.documents_count + statistics.entities_count | number}} Gazettes</h1>
+  <p class="teaser">from {{::statistics.collections_count | number}} African countries</p>
 </div>
 
 <div class="home screen">
@@ -12,8 +12,10 @@
       </h2>
 
       <p>
-        Search documents from previous investigations, official sources, and
-        scraped websites.
+        {{metadata.app.title}} lets you search across
+        <a href="/documents/sources">
+          {{::statistics.collections_count | number}} African countries' National Gazettes
+        </a>.
       </p>
 
       <form class="form-horizontal actions" role="search" ng-submit="searchDocuments(form)">
