@@ -31,7 +31,7 @@ setup(
             'polyglot = aleph.analyze.polyglot_entity:PolyglotEntityAnalyzer'
         ],
         'aleph.crawlers': [
-            'sourceafrica = aleph.crawlers.documentcloud:SourceAfricaCrawler'
+            # 'sourceafrica = aleph.crawlers.documentcloud:SourceAfricaCrawler'
         ],
         'aleph.init': [],
         'console_scripts': [

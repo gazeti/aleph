@@ -44,12 +44,12 @@ base:
 	docker push alephdata/base:latest
 
 image-latest:
-	docker build -t codeforafrica/aleph:latest .
-	docker push codeforafrica/aleph:latest
+	docker build -t gazeti/aleph:latest .
+	docker push gazeti/aleph:latest
 
 image-release:
-	docker build -t codeforafrica/aleph:1.2.5 .
-	docker push codeforafrica/aleph:1.2.5
+	docker build -t gazeti/aleph:1.2.5 .
+	docker push gazeti/aleph:1.2.5
 
 docs:
 	$(DEVDOCKER) sphinx-build -b html -d docs/_build/doctrees ./docs docs/_build/html
