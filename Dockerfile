@@ -1,4 +1,4 @@
-FROM alephdata/base:1.2
+FROM codeforafrica/aleph-base:1.2.1
 MAINTAINER Code for Africa <support@codeforafrica.org>
 ENV DEBIAN_FRONTEND noninteractive
 
