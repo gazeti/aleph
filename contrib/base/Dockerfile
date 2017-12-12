@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 # Enable non-free archive for `unrar`.
 RUN echo "deb http://http.us.debian.org/debian jessie non-free" >/etc/apt/sources.list.d/nonfree.list
 # Enable Node.js archive
-RUN echo 'deb http://deb.nodesource.com/node_8.x jessie main' > /etc/apt/sources.list.d/nodesource.list
+RUN echo 'deb http://deb.nodesource.com/node_6.x jessie main' > /etc/apt/sources.list.d/nodesource.list
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv 68576280
 
 RUN apt-get update -y -q && apt-get -y dist-upgrade && apt-get install -y -q  \
