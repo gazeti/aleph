@@ -3,9 +3,9 @@ MAINTAINER Friedrich Lindenberg <friedrich@pudo.org>
 ENV DEBIAN_FRONTEND noninteractive
 
 # Enable non-free archive for `unrar`.
-RUN echo "deb http://http.us.debian.org/debian stable non-free" >/etc/apt/sources.list.d/nonfree.list
+RUN echo "deb http://http.us.debian.org/debian jessie non-free" >/etc/apt/sources.list.d/nonfree.list
 # Enable Node.js archive
-RUN echo 'deb http://deb.nodesource.com/node_6.x jessie main' > /etc/apt/sources.list.d/nodesource.list
+RUN echo 'deb http://deb.nodesource.com/node_8.x jessie main' > /etc/apt/sources.list.d/nodesource.list
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv 68576280
 
 RUN apt-get update -y -q && apt-get -y dist-upgrade && apt-get install -y -q  \
@@ -25,6 +25,7 @@ RUN apt-get update -y -q && apt-get -y dist-upgrade && apt-get install -y -q  \
         tesseract-ocr-pol tesseract-ocr-slk tesseract-ocr-slv \
         tesseract-ocr-sqi tesseract-ocr-srp tesseract-ocr-tur \
         tesseract-ocr-ukr nodejs djvulibre-bin \
+        tesseract-ocr-swa tesseract-ocr-por \
         && apt-get -y autoremove && apt-get clean
 
 RUN curl -s /tmp/pst.tgz http://www.five-ten-sg.com/libpst/packages/libpst-0.6.69.tar.gz > /tmp/pst.tgz \
@@ -38,7 +39,7 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
 # WebKit HTML to X install since the one that comes with distros is hellishly outdated.
-RUN curl -s /tmp/wkhtmltox.tar.xv https://downloads.wkhtmltopdf.org/0.12/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz > /tmp/wkhtmltox.tar.xv \
+RUN curl -s -L https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz > /tmp/wkhtmltox.tar.xv \
     && tar -xf /tmp/wkhtmltox.tar.xv -C /opt && rm -f /tmp/wkhtmltox.tar.xv
 ENV WKHTMLTOPDF_BIN /opt/wkhtmltox/bin/wkhtmltopdf
 ENV TESSDATA_PREFIX /usr/share/tesseract-ocr
