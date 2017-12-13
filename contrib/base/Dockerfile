@@ -22,7 +22,7 @@ RUN apt-get update -y -q && apt-get -y dist-upgrade && apt-get install -y -q  \
         libtesseract-dev vim libicu-dev libldap2-dev libsasl2-dev \
         tesseract-ocr tesseract-ocr-all \
         nodejs djvulibre-bin \
-        && apt-get -y autoremove && apt-get clean
+    && apt-get -y autoremove && apt-get clean
 
 RUN curl -s /tmp/pst.tgz http://www.five-ten-sg.com/libpst/packages/libpst-0.6.69.tar.gz > /tmp/pst.tgz \
     && cd /tmp && tar xvfz pst.tgz && cd libpst-0.6.69 && ln -s /usr/bin/python /usr/bin/python2.7.10 \
