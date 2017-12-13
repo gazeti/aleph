@@ -38,9 +38,9 @@ build:
 
 
 base:
-	docker build -t codeforafrica/aleph-base:1.2.1 contrib/base
+	docker build -t codeforafrica/aleph-base:1.3 contrib/base
 	docker build -t codeforafrica/aleph-base:latest contrib/base
-	docker push codeforafrica/aleph-base:1.2.1
+	docker push codeforafrica/aleph-base:1.3
 	docker push codeforafrica/aleph-base:latest
 
 image-latest:
@@ -48,7 +48,7 @@ image-latest:
 	docker push codeforafrica/aleph:latest
 
 image-release:
-	docker build -t codeforafrica/aleph:1.2.6 .
+	docker build -t codeforafrica/aleph:1.3 .
 	docker push codeforafrica/aleph:1.2.6
 
 docs:
