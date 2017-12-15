@@ -38,18 +38,18 @@ build:
 
 
 base:
-	docker build -t alephdata/base:1.2 contrib/base
-	docker build -t alephdata/base:latest contrib/base
-	docker push alephdata/base:1.2
-	docker push alephdata/base:latest
+	docker build -t codeforafrica/aleph-base:1.3 contrib/base
+	docker build -t codeforafrica/aleph-base:latest contrib/base
+	docker push codeforafrica/aleph-base:1.3
+	docker push codeforafrica/aleph-base:latest
 
 image-latest:
 	docker build -t gazeti/aleph:latest .
 	docker push gazeti/aleph:latest
 
 image-release:
-	docker build -t gazeti/aleph:1.2.5 .
-	docker push gazeti/aleph:1.2.5
+	docker build -t gazeti/aleph:1.3 .
+	docker push gazeti/aleph:1.3
 
 docs:
 	$(DEVDOCKER) sphinx-build -b html -d docs/_build/doctrees ./docs docs/_build/html
