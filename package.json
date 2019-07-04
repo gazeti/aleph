@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --env.dev",
-    "build:prod": "webpack --env.prod -p"
+    "build:prod": "webpack --env.prod -p",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "license": "MIT",
   "dependencies": {
@@ -33,6 +35,8 @@
     "angular-loading-bar": "^0.9.0",
     "ng-file-upload": "^12.2.12",
     "angular-pdf": "~1.3.0",
-    "angular-truncate": "sparkalow/angular-truncate"
-  }
+    "angular-truncate": "sparkalow/angular-truncate",
+    "snyk": "^1.189.0"
+  },
+  "snyk": true
 }
